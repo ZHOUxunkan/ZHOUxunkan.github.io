@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home on zhouer&#39;s blog</title>
-    <link>/</link>
-    <description>Recent content in Home on zhouer&#39;s blog</description>
+    <title>Cns on zhouer&#39;s blog</title>
+    <link>/cn/</link>
+    <description>Recent content in Cns on zhouer&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《图解设计模式》学习笔记</title>
       <link>/cn/2022/04/26/%E5%9B%BE%E8%A7%A3%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
@@ -20,17 +20,6 @@ Iterator 模式 用于在数据集合中按照顺序遍历集合。
 Template Method 模式 在父类中定义处理流程的框架，在子类中实现具体处理
  AbstractClass 负责声明在模板方法中所使用到的抽象方法和实现模板方法； ConcreteClass 负责实现 AbstractClass 定义的抽象方法。  Factory Method 模式  Product 属于框架的一部分，是一个抽象类，定义了工厂生产出的实例所持有的接口，具体的实现由子类决定； Creator 属于框架的一部分，是负责生产产品的抽象类，不使用 new 关键字来生产实例，而是调用生产实例的专门方法（即在 create 方法中对 createProduct 抽象方法的调用），这样可以防止父类与其他具体类的实现。 ConcreteProduct Product 的具体实现； ConcreteCreator Creator 的具体实现。  Singleton 模式 单例。
 Prototype 模式 根据实例来生成新实例。</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Tue, 26 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>写着玩。
-邮箱：zhouxunkan@gmail.com
-blog 模板来自yihui。</description>
     </item>
     
   </channel>
