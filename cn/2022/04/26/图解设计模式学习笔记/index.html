@@ -7,6 +7,12 @@
     <title>《图解设计模式》学习笔记 - zhouer&#39;s blog</title>
     <meta property="og:title" content="《图解设计模式》学习笔记 - zhouer&#39;s blog">
     
+
+    <link rel="icon" type="image/ico" sizes="32x32" href="/favicon-32.ico">
+<link rel="icon" type="image/ico" sizes="16x16" href="/favicon-16.ico">
+<link rel="icon" type="image/ico" sizes="48x48" href="/favicon-48.ico">
+
+    
     <meta name="twitter:card" content="summary">
 
     
@@ -215,6 +221,62 @@
 </ul>
 <img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220425121448804.png" alt="image-20220425121448804" style="zoom:50%;" />
 <h2 id="facade-模式">Facade 模式</h2>
+<ul>
+<li>Facade 代表构成系统的许多其他角色的“简单窗口”，对内作为协调者实现方法，对外暴露接口以供调用；</li>
+<li>被调用者 只实现自己的功能模块，与其他模块不相交；</li>
+<li>Client Facade的调用者。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427112001587.png" alt="image-20220427112001587" style="zoom:50%;" />
+<h2 id="mediator-模式">Mediator 模式</h2>
+<ul>
+<li><del>Mediator 负责定义与 Colleague 之间进行通讯和做出决定的接口；</del></li>
+<li><del>ConcreteMediator 实现接口；</del></li>
+<li><del>Colleague 定义与 Mediator 之间进行通讯和做出决定的接口；</del></li>
+<li><del>ConcreteColleague 实现接口。</del></li>
+</ul>
+<hr>
+<p>由 Mediator 创建和管理所有的 Colleague 组件，具体来说就是就是在每个 Colleague 中注册 Mediator，在Mediator 中注册每一个 Colleague ，保持两者之间的通讯，在此基础上，实现 Colleague 向 Mediator 报告每一次状态变化，根据变化 Mediator 调用 Colleague 统一的接口实现不同的需求（该接口由各个 Colleague 实现类具体实现）。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427121204114.png" alt="image-20220427121204114" style="zoom: 40%;" />
+<h2 id="observer-模式">Observer 模式</h2>
+<ul>
+<li>Subject 定义了注册观察者和删除观察者的方法，声明通知观察者的接口（调用不同观察者的不同具体实现）；</li>
+<li>ConcreteSubject 自身发生变化时执行通知观察者的行为；</li>
+<li>Observer 接受通知，声明 update 方法；</li>
+<li>ConcreteObserver 具体实现不同功能的 update 方法， update 方法会在被通知后调用，获取观察对象的最新状态。</li>
+</ul>
+<p>具体的说，Observer 只是提供了对观察对象的处理方法（该方法需要传入观察对象或需要的属性），在每次观察对象状态变化时，由观察对象自身在已注册的Observer 中遍历调用这一处理方法；这一角度看来 Observer 可以被看做只是数据处理方法的提供者，实现了数据自身与其的解耦。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427131455984.png" alt="image-20220427131455984" style="zoom:50%;" />
+<h2 id="memento-模式">Memento 模式</h2>
+<p>在保存和恢复实例时保护对象的封装性。</p>
+<ul>
+<li>Originator 在保存自己的最新状态时生成 Memento。当把以前保存的Memento传递给 Originator 时会将自己恢复成Memento的状态；</li>
+<li>Memento 保存 Originator 的内部信息作为快照，并且不会向外暴露接口，只有同个包内的 Originator 才能访问；可以采用宽接口和窄接口两种API模式，即对 get 方法的权限修饰词采用默认或 public。</li>
+<li>CareTaker 在需要保存 Originator 的状态时，会调用Originator 的方法生成 Memento 实例，并一直保存一个Memento ，只能调用 Memento 的窄接口，不能访问 Memento 的其他内部信息。</li>
+</ul>
+<p>就是隔离快照和使用者的一种模式。（非常草率）</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427141622252.png" alt="image-20220427141622252" style="zoom: 67%;" />
+<h2 id="state-模式">State 模式</h2>
+<p>将复杂的 if-else 状态判断拆分成一个个表示状态的 State 类，在Context 中直接调用 State 实例的方法，这些方法在不同的 State 中有不同的实现，State 实现类中也有切换状态的方法，即切换成不同的 ConcreteState 。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427145643424.png" alt="image-20220427145643424" style="zoom: 50%;" />
+<h2 id="flyweight-模式">Flyweight 模式</h2>
+<p>通过共享实例减少 new 实例。</p>
+<ul>
+<li>Flyweight  被轻量化的类，只在需要的时候被 FlyweightFactory 创建一个实例然后被复用；</li>
+<li>FlyweightFactory 工厂类，通常是单例的，在需要时生产并保存一个 Flyweight 实例；</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427165741159.png" alt="image-20220427165741159" style="zoom:50%;" />
+<h2 id="proxy-模式">Proxy 模式</h2>
+<p>代理模式。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427173555345.png" alt="image-20220427173555345" style="zoom: 67%;" />
+<h2 id="command-模式">Command 模式</h2>
+<ul>
+<li>Command 定义命令的接口；</li>
+<li>ConcreteCommand 实现接口；</li>
+<li>Receiver 执行命令时的对象，接收命令；</li>
+<li>Invoker 调用 Command 的接口方法 excute。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427181549634.png" alt="image-20220427181549634" style="zoom:50%;" />
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427181612756.png" alt="image-20220427181612756" style="zoom:50%;" />
 
 
 
