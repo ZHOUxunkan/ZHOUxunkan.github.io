@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cns on zhouer&#39;s blog</title>
-    <link>/cn/</link>
-    <description>Recent content in Cns on zhouer&#39;s blog</description>
+    <title>日劇 on zhouer&#39;s blog</title>
+    <link>/tags/%E6%97%A5%E5%8A%87/</link>
+    <description>Recent content in 日劇 on zhouer&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E6%97%A5%E5%8A%87/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>「カルテット」臺詞第一集</title>
       <link>/cn/2022/04/27/%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88%E8%87%BA%E8%A9%9E%E7%AC%AC%E4%B8%80%E9%9B%86/</link>
@@ -27,21 +27,6 @@
 別府 司：動画？
 巻 真紀：カモの赤ちゃんが排水溝に　次々と落ちてって
 別府 司：マジですが&amp;hellip;　家森さんも　すずめちゃんも　巻さんが来るのを　楽しみにしています，僕は　運命だと思ってるです，ほら　僕達　東京のカラオケボックスで　偶然出会いって&amp;hellip;　しかも　その4人が　4人とも奏者で，バイオリン　バイオリン　ビオラ　チェロ，弦楽四重奏　組むしかないですよね，僕たち　絶対最高の　カルテットになります。</description>
-    </item>
-    
-    <item>
-      <title>《圖解設計模式》學習筆記</title>
-      <link>/cn/2022/04/26/%E5%9C%96%E8%A7%A3%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/</link>
-      <pubDate>Tue, 26 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/cn/2022/04/26/%E5%9C%96%E8%A7%A3%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/</guid>
-      <description>相關代碼。
-Iterator 模式 用於在數據集合中按照順序遍歷集合。
- next() 返回當前元素，並指向下一個元素； hasNext() 確認接下來是否可以調用 next 方法。  Adapter 模式  target 負責定義所需要的方法； client 負責使用 target 所定義的方法，即具體的業務實現； adaptee 被適配的一方，即提供方法具體實現的一方； adapter 使用 adaptee 已有的功能滿足 target 的需求，適配器本體。  類適配器模式：使用繼承類和繼承要求實現方法的接口，重寫接口方法時調用父類方法實現包裝。
-對象適配器模式：利用被包裝類的具體實現的方法調用實現包裝，即在適配器中創建一個被包裝類的實例。
-Template Method 模式 在父類中定義處理流程的框架，在子類中實現具體處理
- AbstractClass 負責聲明在模板方法中所使用到的抽象方法和實現模板方法； ConcreteClass 負責實現 AbstractClass 定義的抽象方法。  Factory Method 模式  Product 屬於框架的一部分，是一個抽象類，定義了工廠生產出的實例所持有的接口，具體的實現由子類決定； Creator 屬於框架的一部分，是負責生產產品的抽象類，不使用 new 關鍵字來生產實例，而是調用生產實例的專門方法（即在 create 方法中對 createProduct 抽象方法的調用），這樣可以防止父類與其他具體類的實現。 ConcreteProduct Product 的具體實現； ConcreteCreator Creator 的具體實現。  Singleton 模式 單例。
-Prototype 模式 根據實例來生成新實例。</description>
     </item>
     
   </channel>

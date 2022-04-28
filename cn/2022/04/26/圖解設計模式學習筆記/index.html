@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>《圖解設計模式》學習筆記 - zhouer&#39;s blog</title>
+    <meta property="og:title" content="《圖解設計模式》學習筆記 - zhouer&#39;s blog">
+    
+
+    <link rel="icon" type="image/ico" sizes="32x32" href="/favicon-32.ico">
+<link rel="icon" type="image/ico" sizes="16x16" href="/favicon-16.ico">
+<link rel="icon" type="image/ico" sizes="48x48" href="/favicon-48.ico">
+
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="相關代碼。
+[&amp;hellip;] 用於在數據集合中按照順序遍歷集合。
+[&amp;hellip;] 類適配器模式：使用繼承類和繼承要求實現方法的接口，重寫接口方法時調用父類方法實現包裝。
+[&amp;hellip;] 對象適配器模式：利用被包裝類的具體實現的方法調用實現包裝，即在適配器中創建一個被包裝類的實例。
+[&amp;hellip;] 在父類中定義處理流程的框架，在子類中實現具體處理
+[&amp;hellip;] 單例。 &amp;hellip;">
+      <meta property="og:description" content="相關代碼。
+[&amp;hellip;] 用於在數據集合中按照順序遍歷集合。
+[&amp;hellip;] 類適配器模式：使用繼承類和繼承要求實現方法的接口，重寫接口方法時調用父類方法實現包裝。
+[&amp;hellip;] 對象適配器模式：利用被包裝類的具體實現的方法調用實現包裝，即在適配器中創建一個被包裝類的實例。
+[&amp;hellip;] 在父類中定義處理流程的框架，在子類中實現具體處理
+[&amp;hellip;] 單例。 &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423175824810.png">
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  
+  <body class="cn">
+    <header class="masthead">
+      <h1><a href="/">zhouer&#39;s blog</a></h1>
+
+<p class="tagline">閱讀、學習、寫作自留地</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" hidden/>
+  <label id="menu-label" for="menu-check" class="unselectable" hidden>
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>《圖解設計模式》學習筆記</h1>
+
+<h3>zhouer
+  /  2022-04-26</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>相關<a href="https://github.com/ZHOUxunkan/design-patterns">代碼</a>。</p>
+<h2 id="iterator-模式">Iterator 模式</h2>
+<p>用於在數據集合中按照順序遍歷集合。</p>
+<ul>
+<li>next() 返回當前元素，並指向下一個元素；</li>
+<li>hasNext() 確認接下來是否可以調用 next 方法。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423175824810.png" alt="image-20220423175824810" style="zoom:80%;" />
+<h2 id="adapter-模式">Adapter 模式</h2>
+<ul>
+<li>target 負責定義所需要的方法；</li>
+<li>client 負責使用 target 所定義的方法，即具體的業務實現；</li>
+<li>adaptee 被適配的一方，即提供方法具體實現的一方；</li>
+<li>adapter 使用 adaptee 已有的功能滿足 target 的需求，適配器本體。</li>
+</ul>
+<p>類適配器模式：使用繼承類和繼承要求實現方法的接口，重寫接口方法時調用父類方法實現包裝。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423175913707.png" alt="image-20220423175913707" style="zoom: 80%;" />
+<p>對象適配器模式：利用被包裝類的具體實現的方法調用實現包裝，即在適配器中創建一個被包裝類的實例。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423175928970.png" alt="image-20220423175928970" style="zoom: 80%;" />
+<h2 id="template-method-模式">Template Method 模式</h2>
+<p>在父類中定義處理流程的框架，在子類中實現具體處理</p>
+<ul>
+<li>AbstractClass 負責聲明在模板方法中所使用到的抽象方法和實現模板方法；</li>
+<li>ConcreteClass 負責實現 AbstractClass 定義的抽象方法。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423180005880.png" alt="image-20220423180005880" style="zoom: 80%;" />
+<h2 id="factory-method-模式">Factory Method 模式</h2>
+<ul>
+<li>Product 屬於框架的一部分，是一個抽象類，定義了工廠生產出的實例所持有的接口，具體的實現由子類決定；</li>
+<li>Creator 屬於框架的一部分，是負責生產產品的抽象類，<strong>不使用 new 關鍵字來生產實例，而是調用生產實例的專門方法（即在 create 方法中對 createProduct 抽象方法的調用），這樣可以防止父類與其他具體類的實現</strong>。</li>
+<li>ConcreteProduct Product 的具體實現；</li>
+<li>ConcreteCreator Creator 的具體實現。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423180041030.png" alt="image-20220423180041030" style="zoom: 50%;" />
+<h2 id="singleton-模式">Singleton 模式</h2>
+<p>單例。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423180115824.png" alt="image-20220423180115824" style="zoom: 67%;" />
+<h2 id="prototype-模式">Prototype 模式</h2>
+<p>根據實例來生成新實例。</p>
+<ul>
+<li>Prototype 負責定義用於復製現有實例來生成新實例的方法，構成 client 與 prototype 具體實現類的中介，達成解耦；</li>
+<li>ConcretePrototype 負責實現復製現有實例並生成新實例的方法，即實現 createClone 方法；</li>
+<li>Client 負責使用復製實例的方法生成新的實例，采用註冊中心的形式，調用 Prototype 的 createClone 方法實現復製。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220423180146891.png" alt="image-20220423180146891" style="zoom: 50%;" />
+<h2 id="builder-模式">Builder 模式</h2>
+<ul>
+<li>Builder 負責定義用於生成實例的接口；</li>
+<li>ConcreteBuilder Builder 的具體實現，還定義了處理結果的返回方法；</li>
+<li>Direct 負責使用 Builder 的接口來生成實例，不直接依賴於 ConcreteBuilder，只與 Builder 發生關系；</li>
+<li>Client Builder 模式的使用者，調用Direct 後傳入ConcreteBuilder 的實例實現 build 過程。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220424095255061.png" alt="image-20220424095255061" style="zoom: 50%;" />
+<h2 id="abstract-factory-模式">Abstract Factory 模式</h2>
+<ul>
+<li>AbstractProduct 負責定義 AbstractFactory 所生產的抽象零件和產品的接口；</li>
+<li>AbstractFactory 負責定義用於生成抽象產品的接口；</li>
+<li>Client 調用AbstractProduct 和 AbstractFactory 的接口來工作；</li>
+<li>ConcreteProduct 負責實現 AbstractProduct 的接口；</li>
+<li>ConcreteFactory 負責實現 AbstractFactory 的接口；</li>
+</ul>
+<p>易於增加具體的工廠，難以增加新的零件。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220424104201204.png" alt="image-20220424104201204" style="zoom: 50%;" />
+<h2 id="bridge-模式">Bridge 模式</h2>
+<p>將類的功能層次結構和實現層次結構連接，即對接口添加功能的需求和對接口規定 API 不同實現的需求。Bridge 模式將兩者區隔開並創建一個連接通道。</p>
+<ul>
+<li>Abstraction 位於<strong>功能層次結構</strong>的最上層，在其中維持一個 Implementor 實現類，調用其方法；</li>
+<li>RefinedAbstraction 繼承 Abstraction，添加新功能；</li>
+<li>Implementor 位於<strong>實現層次結構</strong>的最上層，作為接口規定 API ，並被 Abstraction 調用；</li>
+<li>ConcreteImplementor 實現 Implementor 接口。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220424112822832.png" alt="image-20220424112822832" style="zoom:67%;" />
+<p>繼承是強關聯，委托是弱關聯（方法調用）。</p>
+<h2 id="strategy-模式">Strategy 模式</h2>
+<p>整體替換。</p>
+<ul>
+<li>Strategy 負責提供策略所必須要的接口；</li>
+<li>ConcreteStrategy 具體實現策略；</li>
+<li>Context 負責使用 Strategy。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220424121451058.png" alt="image-20220424121451058" style="zoom: 50%;" />
+<h2 id="composite-模式">Composite 模式</h2>
+<p>使容器和內容具有一致性，創造出遞歸結構。</p>
+<ul>
+<li>Leaf 表示內容，類似葉子節點，其中不能加入其他角色；</li>
+<li>Composite 容器，可放入容器與內容；</li>
+<li>Component Leaf 和 Composite 的父類，統一兩者；</li>
+<li>Client 調用 Composite 模式者。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220424144622823.png" alt="image-20220424144622823" style="zoom: 50%;" />
+<h2 id="decorator-模式">Decorator 模式</h2>
+<p>嵌套裝飾。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220424151650643.png" alt="image-20220424151650643" style="zoom:50%;" />
+<ul>
+<li>Component 增加功能時的核心角色，所有成員的最高父類；</li>
+<li>ConcreteComponent Component 的具體實現類；</li>
+<li>Decorator 裝飾物，和 Component 具有相同的接口，內部保存了被裝飾的對象；</li>
+<li>ConcreteDecorator Decorator 的具體實現，也可被裝飾。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220424151615062.png" alt="image-20220424151615062" style="zoom:50%;" />
+<p>重點在於裝飾物與被裝飾物具有一致性（具有相同的接口），裝飾物包裹被裝飾物後依舊可以調用接口，采用委托的形式實現了功能的疊加。</p>
+<h2 id="visitor-模式">Visitor 模式</h2>
+<p>在 Visitor 中規定 visit 方法（可重載以拓展功能），在被訪問對象中定義 accept 方法，傳入 Visitor 實例調用其 visit 方法，達到將處理都集中在 Visitor 中的目的。</p>
+<ul>
+<li>Visitor 負責對數據結構中的每個具體元素聲明一個用於訪問的方法；</li>
+<li>ConcreteVisitor 實現 Visitor 規定的接口，在 visit 方法進行中其內部狀態可以變化，即是一種類似遞歸的狀態；</li>
+<li>Element 訪問對象的接口，聲明 accept 方法；</li>
+<li>ConcreteElement 負責實現 Element 的接口；</li>
+<li>ObjectStructure 負責處理 Element 的集合。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220425113425853.png" alt="image-20220425113425853" style="zoom:50%;" />
+<h2 id="chain-of-responsibility-模式">Chain of Responsibility 模式</h2>
+<p>將多個對象組成一條職責鏈，按照順序一個一個地找出到底應該誰來負責處理。</p>
+<ul>
+<li>Handler 定義了處理者的接口，維持了下一個處理者；</li>
+<li>ConcreteHandler 各種 Handler 的具體實現，組成處理鏈條；</li>
+<li>Client 向第一個 ConcreteHandler 發送請求的角色。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220425121448804.png" alt="image-20220425121448804" style="zoom:50%;" />
+<h2 id="facade-模式">Facade 模式</h2>
+<ul>
+<li>Facade 代表構成系統的許多其他角色的「簡單窗口」，對內作為協調者實現方法，對外暴露接口以供調用；</li>
+<li>被調用者 只實現自己的功能模塊，與其他模塊不相交；</li>
+<li>Client Facade的調用者。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427112001587.png" alt="image-20220427112001587" style="zoom:50%;" />
+<h2 id="mediator-模式">Mediator 模式</h2>
+<ul>
+<li><del>Mediator 負責定義與 Colleague 之間進行通訊和做出決定的接口；</del></li>
+<li><del>ConcreteMediator 實現接口；</del></li>
+<li><del>Colleague 定義與 Mediator 之間進行通訊和做出決定的接口；</del></li>
+<li><del>ConcreteColleague 實現接口。</del></li>
+</ul>
+<hr>
+<p>由 Mediator 創建和管理所有的 Colleague 組件，具體來說就是就是在每個 Colleague 中註冊 Mediator，在Mediator 中註冊每一個 Colleague ，保持兩者之間的通訊，在此基礎上，實現 Colleague 向 Mediator 報告每一次狀態變化，根據變化 Mediator 調用 Colleague 統一的接口實現不同的需求（該接口由各個 Colleague 實現類具體實現）。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427121204114.png" alt="image-20220427121204114" style="zoom: 40%;" />
+<h2 id="observer-模式">Observer 模式</h2>
+<ul>
+<li>Subject 定義了註冊觀察者和刪除觀察者的方法，聲明通知觀察者的接口（調用不同觀察者的不同具體實現）；</li>
+<li>ConcreteSubject 自身發生變化時執行通知觀察者的行為；</li>
+<li>Observer 接受通知，聲明 update 方法；</li>
+<li>ConcreteObserver 具體實現不同功能的 update 方法， update 方法會在被通知後調用，獲取觀察對象的最新狀態。</li>
+</ul>
+<p>具體的說，Observer 只是提供了對觀察對象的處理方法（該方法需要傳入觀察對象或需要的屬性），在每次觀察對象狀態變化時，由觀察對象自身在已註冊的Observer 中遍歷調用這一處理方法；這一角度看來 Observer 可以被看做只是數據處理方法的提供者，實現了數據自身與其的解耦。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427131455984.png" alt="image-20220427131455984" style="zoom:50%;" />
+<h2 id="memento-模式">Memento 模式</h2>
+<p>在保存和恢復實例時保護對象的封裝性。</p>
+<ul>
+<li>Originator 在保存自己的最新狀態時生成 Memento。當把以前保存的Memento傳遞給 Originator 時會將自己恢復成Memento的狀態；</li>
+<li>Memento 保存 Originator 的內部信息作為快照，並且不會向外暴露接口，只有同個包內的 Originator 才能訪問；可以采用寬接口和窄接口兩種API模式，即對 get 方法的權限修飾詞采用默認或 public。</li>
+<li>CareTaker 在需要保存 Originator 的狀態時，會調用Originator 的方法生成 Memento 實例，並一直保存一個Memento ，只能調用 Memento 的窄接口，不能訪問 Memento 的其他內部信息。</li>
+</ul>
+<p>就是隔離快照和使用者的一種模式。（非常草率）</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427141622252.png" alt="image-20220427141622252" style="zoom: 67%;" />
+<h2 id="state-模式">State 模式</h2>
+<p>將復雜的 if-else 狀態判斷拆分成一個個表示狀態的 State 類，在Context 中直接調用 State 實例的方法，這些方法在不同的 State 中有不同的實現，State 實現類中也有切換狀態的方法，即切換成不同的 ConcreteState 。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427145643424.png" alt="image-20220427145643424" style="zoom: 50%;" />
+<h2 id="flyweight-模式">Flyweight 模式</h2>
+<p>通過共享實例減少 new 實例。</p>
+<ul>
+<li>Flyweight  被輕量化的類，只在需要的時候被 FlyweightFactory 創建一個實例然後被復用；</li>
+<li>FlyweightFactory 工廠類，通常是單例的，在需要時生產並保存一個 Flyweight 實例；</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427165741159.png" alt="image-20220427165741159" style="zoom:50%;" />
+<h2 id="proxy-模式">Proxy 模式</h2>
+<p>代理模式。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427173555345.png" alt="image-20220427173555345" style="zoom: 67%;" />
+<h2 id="command-模式">Command 模式</h2>
+<ul>
+<li>Command 定義命令的接口；</li>
+<li>ConcreteCommand 實現接口；</li>
+<li>Receiver 執行命令時的對象，接收命令；</li>
+<li>Invoker 調用 Command 的接口方法 excute。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427181549634.png" alt="image-20220427181549634" style="zoom:50%;" />
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220427181612756.png" alt="image-20220427181612756" style="zoom:50%;" />
+<h2 id="interpreter-模式">Interpreter 模式</h2>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220428100403201.png" alt="image-20220428100403201" style="zoom:50%;" />
+
+
+
+  <footer>
+  
+  
+
+  
+  <hr>
+  <div class="copyright">© <a href="https://ZHOUxunkan.github.io">Xunkan Zhou</a> 2022 | <a href="https://github.com/ZHOUxunkan">Github</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
