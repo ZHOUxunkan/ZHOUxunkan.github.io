@@ -6,22 +6,22 @@
     <description>Recent content in Categories on zhouer&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java</title>
+      <link>/categories/java/</link>
+      <pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/java/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>日語</title>
       <link>/categories/%E6%97%A5%E8%AA%9E/</link>
       <pubDate>Wed, 27 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>/categories/%E6%97%A5%E8%AA%9E/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>/categories/java/</link>
-      <pubDate>Tue, 26 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/java/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>《深入理解 Java 虛擬機》學習筆記 - zhouer&#39;s blog</title>
+    <meta property="og:title" content="《深入理解 Java 虛擬機》學習筆記 - zhouer&#39;s blog">
+    
+
+    <link rel="icon" type="image/ico" sizes="32x32" href="/favicon-32.ico">
+<link rel="icon" type="image/ico" sizes="16x16" href="/favicon-16.ico">
+<link rel="icon" type="image/ico" sizes="48x48" href="/favicon-48.ico">
+
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="[&amp;hellip;] Program Counter Register，可以看做是當前線程所執行的字節碼的行號指示器。字節碼解釋器工作時就是通過改變這個計數器的值來選取下一條需要執行的字節碼指令，它是程序控製流的指示器，分支、循環、跳轉、異常處理、線程恢復等基礎功能都需要依賴這個計數器來完成。
+由於Java虛擬機的多線程是通過線程輪流切換、分配處理器執行時間的方式來實現的，在任何一個確定的時刻，一 &amp;hellip;">
+      <meta property="og:description" content="[&amp;hellip;] Program Counter Register，可以看做是當前線程所執行的字節碼的行號指示器。字節碼解釋器工作時就是通過改變這個計數器的值來選取下一條需要執行的字節碼指令，它是程序控製流的指示器，分支、循環、跳轉、異常處理、線程恢復等基礎功能都需要依賴這個計數器來完成。
+由於Java虛擬機的多線程是通過線程輪流切換、分配處理器執行時間的方式來實現的，在任何一個確定的時刻，一 &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220429095119493.png">
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  
+  <body class="cn">
+    <header class="masthead">
+      <h1><a href="/">zhouer&#39;s blog</a></h1>
+
+<p class="tagline">閱讀、學習、寫作自留地</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" hidden/>
+  <label id="menu-label" for="menu-check" class="unselectable" hidden>
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>《深入理解 Java 虛擬機》學習筆記</h1>
+
+<h3>zhouer
+  /  2022-04-29</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="走近-java">走近 Java</h2>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220429095119493.png" alt="image-20220429095119493" style="zoom: 67%;" />
+<h2 id="自動內存管理">自動內存管理</h2>
+<h3 id="java-內存區域與內存溢出異常">Java 內存區域與內存溢出異常</h3>
+<h4 id="運行時數據區域">運行時數據區域</h4>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220429102508662.png" alt="image-20220429102508662"></p>
+<h5 id="程序計數區">程序計數區</h5>
+<p>Program Counter Register，可以看做是當前線程所執行的字節碼的行號指示器。字節碼解釋器工作時就是通過改變這個計數器的值來選取下一條需要執行的字節碼指令，它是程序控製流的指示器，分支、循環、跳轉、異常處理、線程恢復等基礎功能都需要依賴這個計數器來完成。</p>
+<p>由於Java虛擬機的多線程是通過線程輪流切換、分配處理器執行時間的方式來實現的，在任何一個確定的時刻，一個處理器（對於多核處理器來說是一個內核）都只會執行一條線程中的指令。因此，為了線程切換後能恢復到正確的執行位置，每條線程都需要有一個獨立的程序計數器，各條線程之間計數器互不影響，獨立存儲，我們稱這類內存區域為「線程私有」的內存。</p>
+<p>當實現 Native 方法時，這個計數器值為Undefined.</p>
+<h5 id="java-虛擬機棧">Java 虛擬機棧</h5>
+<p>Java Virtual Machine Stack，線程私有的，生命週期與線程相同。每個方法被執行時，虛擬機就同步創建一個棧幀用於存儲局部變量表、操作數棧、動態連接、方法出口等信息。每一個方法被調用直至執行完畢的過程，就對應著一個棧幀在虛擬機棧中從入棧到出棧的過程。</p>
+<p>局部變量表存放了編譯器可知的各種 Java 虛擬機基本數據類型、對象引用和 returnAddress 類型（指向了一條字節碼指令的地址）。局部變量表以 Slot 的基本單元儲存數據，局部變量表所需的內存空間在編譯期間完成分配在方法運行期間不會改變局部變量表的大小（指 Slot 的數量）。</p>
+<h5 id="本地方法棧">本地方法棧</h5>
+<p>Native Method Stack，為調用本地方法服務。</p>
+<h5 id="java-堆">Java 堆</h5>
+<p>Java Heap，”幾乎“所有的對象實例都在這裡分配內存。所有線程共享的 Java 堆中可以劃分出多個線程私有的分配緩衝區（Thread Local Allocation Buffer, TLAB)，以提升對象分配時的效率。</p>
+<h5 id="方法區">方法區</h5>
+<p>Method Area，用於存儲已被虛擬機加載的類型信息、常量、靜態變量、及時編譯器編譯後的代碼緩存等數據。作為一個概念，在 HotSpot 中以永久代/元空間實現。</p>
+<h5 id="運行時常量池">運行時常量池</h5>
+<p>Runtime Constant Pool，屬於方法區的一部分。Class 文件中用於存放編譯期生成的各種字面量與符號引用的常量池表在類加載後放到方法區的運行時常量池中。</p>
+<h5 id="直接內存">直接內存</h5>
+<p>Direct Memory，在 NIO 的引入後虛擬機可以使用 Native 函數庫直接分配堆外內存，然後通過通過一個 DirectByteBuffer 對象作為這塊內存的引用進行操作。</p>
+<h4 id="對象">對象</h4>
+<h5 id="對象的創建">對象的創建</h5>
+<ol>
+<li>虛擬機遇到 new 指令；</li>
+<li>檢查這一指令的藏書是否能在常量池中定位的到一個類的符號引用，並檢查這個類是否被加載、解析和初始化。沒有的話就進行類加載。</li>
+<li>為新對象在堆中分配內存；（多線程情況下，採用 CAS 或 TLAB）</li>
+<li>將分配到的內存空間（不包括對象頭）都初始化為零值；</li>
+<li>對對象進行必要的設置，信息存儲在對象頭裡。</li>
+</ol>
+<p>此時Class 文件中的 &lt;init&gt; 方法尚未執行，所有字段都為零值。</p>
+<p>#####對象的內存佈局</p>
+<p>包括三部分對象頭（Header）、實例數據（Instance Data）、對齊填充（Padding）。</p>
+<h5 id="對象的訪問定位">對象的訪問定位</h5>
+<p>句柄訪問：堆內劃分出一塊句柄池，reference 中存儲的就是對象的句柄地址，句柄中包含了對象示例數據與類型數據各自的地址信息。</p>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220429111250791.png" alt="image-20220429111250791"></p>
+<p>直接指針訪問：reference 中存儲的就是對象地址，訪問速度快，HotSpot 中主要使用。</p>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220429111607509.png" alt="image-20220429111607509"></p>
+
+
+
+  <footer>
+  
+  
+
+  
+  <hr>
+  <div class="copyright">© <a href="https://ZHOUxunkan.github.io">Xunkan Zhou</a> 2022 | <a href="https://github.com/ZHOUxunkan">Github</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
