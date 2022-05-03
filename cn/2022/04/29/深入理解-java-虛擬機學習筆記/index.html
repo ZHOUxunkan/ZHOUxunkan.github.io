@@ -135,6 +135,85 @@
 <p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220429111250791.png" alt="image-20220429111250791"></p>
 <p>直接指針訪問：reference 中存儲的就是對象地址，訪問速度快，HotSpot 中主要使用。</p>
 <p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220429111607509.png" alt="image-20220429111607509"></p>
+<h3 id="垃圾收集器與內存分配策略">垃圾收集器與內存分配策略</h3>
+<h4 id="對象存活判定算法">對象存活判定算法</h4>
+<h5 id="引用計數算法">引用計數算法</h5>
+<p>Reference Counting，在對象中添加一個引用計數器，計數為0時即為垃圾。需要額外工作配合例外狀態，比如循環引用。</p>
+<h5 id="可達性分析算法">可達性分析算法</h5>
+<p>通過一系列被稱為 &ldquo;GC Roots&rdquo; 的根對象作為起始點集，從這些節點開始根據引用關係向下搜索，走過的路程稱為“引用鏈”（Reference Chain），如果有搞對象和 &ldquo;GC Roots&rdquo; 間沒有任何引用鏈相連，或者不可達時，證明此對象可被回收。Java 虛擬機中採用該算法。</p>
+<p>Java中，GC Roots 對象包括：</p>
+<ul>
+<li>在虛擬機棧中（棧幀中的本地變量表）引用的對象；</li>
+<li>在方法區中類靜態屬性引用的對象；</li>
+<li>在方法區中常量引用的對象；</li>
+<li>在本地方法棧中 JNI（Native 方法）引用的對象；</li>
+<li>虛擬機的內部引用；</li>
+<li>被同步鎖（synchronized）持有的對象；</li>
+<li>反映虛擬機內部請款的 JMXBean、JVMTI 中註冊的回調、本地代碼緩存等。</li>
+</ul>
+<h5 id="引用">引用</h5>
+<ul>
+<li>強引用（Strongly Reference）：在程序代碼中普遍存在的引用賦值，垃圾收集器永遠不會回收；</li>
+<li>軟引用（Soft Reference）：用以描述一些還有用，但非必要的對象，在將要發生內存溢出前，會把這些對象列進回收範圍進行二次回收；</li>
+<li>弱引用（Weak Reference）：無論內存是否足夠都會被回收；</li>
+<li>虛引用（Phantom Reference）：一個對象是否有虛引用不影響其生存時間，也無法通過虛引用來獲取對象，設置虛引用的唯一目只是為了在這個對象被回收時收到一個通知。</li>
+</ul>
+<h5 id="回收方法區">回收方法區</h5>
+<p>一個類被允許回收需要同時滿足三個判定條件：</p>
+<ol>
+<li>該類所有實例都已被回收；</li>
+<li>加載該類的類加載器已被回收；</li>
+<li>該類對應的 java.lang.Class 對象沒有在任何地方被引用，無法在任何地方通過反射訪問該類方法。</li>
+</ol>
+<h4 id="垃圾收集算法">垃圾收集算法</h4>
+<h5 id="分代收集理論">分代收集理論</h5>
+<p>Generational Collection，建立在三個分代假說之上：</p>
+<ul>
+<li>弱分代假說：絕大多數對象都是朝生夕死；</li>
+<li>強分代假說：熬過越多次 CG 的對象就越消亡；</li>
+<li>跨代引用假說：跨代引用相對于同代引用來說佔極少數。</li>
+</ul>
+<p>收集器應該將堆劃分出不同的區域，然後將回收對象依據年齡分配到不同區域之中存儲。對於跨代引用，只在新生代建立一個全局的數據結構（記憶集），這個結構把老年代劃分成若干小塊，標識出老年代的哪塊內存會存在跨代引用，發生 Minor GC 時只把這一塊內存加入 GC Roots 進行掃描，減少 STW 時間。</p>
+<h5 id="標記-清除算法">標記-清除算法</h5>
+<p>Mark-Sweep，缺點在於執行效率不穩定和內存空間碎片化問題。</p>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503103743505.png" alt="image-20220503103743505"></p>
+<h5 id="標記-複製算法">標記-複製算法</h5>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503103912973.png" alt="image-20220503103912973"></p>
+<h5 id="標記-整理算法">標記-整理算法</h5>
+<p>標記-複製算法在對象存活率高時要進行較多的複製操作並且為了防止內存溢出需要有額外的空間進行分配擔保，所以老年代不能採用標記-複製算法。標記-整理算法缺點在於需要暫停用戶進程，產生 &ldquo;Stop The World&rdquo;。</p>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503104430058.png" alt="image-20220503104430058"></p>
+<h4 id="todo-hotspot-的算法細節實現">//TODO HotSpot 的算法細節實現</h4>
+<h4 id="經典垃圾收集器">經典垃圾收集器</h4>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503105054483.png" alt="image-20220503105054483"></p>
+<h5 id="serial-收集器">Serial 收集器</h5>
+<p>單線程收集器，進行垃圾收集時必須暫停其他所有工作線程。簡單高效（與其他收集器的單線程比起來），額外內存消耗小，對於小內存服務有優勢。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503112355530.png" alt="image-20220503112355530" style="zoom:80%;" />
+<h5 id="parnew-收集器">ParNew 收集器</h5>
+<p>Serial 收集器的多線程版，在 JDK 9以後只能和 CMS 搭配使用。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503112650937.png" alt="image-20220503112650937" style="zoom:80%;" />
+<h5 id="parallel-scavenge-收集器">Parallel Scavenge 收集器</h5>
+<p>主要目標是達到一個可控的吞吐量，兼具自適應功能。</p>
+<h5 id="serial-old-收集器">Serial Old 收集器</h5>
+<p>作為 CMS 的後備預案。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503113127838.png" alt="image-20220503113127838" style="zoom:80%;" />
+<h5 id="parallel-old-收集器">Parallel Old 收集器</h5>
+<p>搭配 Parallel Scavenge 收集器使用。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503113259887.png" alt="image-20220503113259887" style="zoom:80%;" />
+<h5 id="csm-收集器">CSM 收集器</h5>
+<p>Concurrent Mark Sweep，以獲取最短停段時間為目標的收集器，適用于關注響應時間的服務端。運作過程包括：1）初始標記；2）並發標記；3）重新標記；4）並發清除。初始標記和重新標記需要&quot;Stop The World&quot;。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503113652217.png" alt="image-20220503113652217" style="zoom:80%;" />
+<p>缺點在於：1）對處理器資源敏感，會降低總吞吐量；2）無法處理浮動垃圾（Floating Garbage，在標記過程結束後產生的垃圾），有可能出現&quot;Concurrent Mode Failure&quot; 失敗而導致另一次 Full GC，因此 CMS 收集器需要預留一部分空間造成 GC 頻率提高；3）採用標記-清除算法，產生空間碎片，會提高引發 Full GC 的頻率。</p>
+<h5 id="garbage-first-收集器">Garbage First 收集器</h5>
+<p>面向堆內存任何部分來組成回收集（Collection Set，CSet）進行回收。G1 基於 Region 的堆內存佈局，不再堅持固定大小以及固定數量的分代區域劃分，而是把連續的堆內存劃分成多個大小相等的獨立區域（Region），每一個 Region 都可以根據需要扮演 Eden 區、Survivor 區、老年代。Region 中還有一類特殊的 Humongous 區域，用於存儲大對象。</p>
+<p>G1 收集器將 Region 作為單次回收的最小單元，避免了對整個堆進行的全區域回收，具體處理思路就是讓 G1 收集器去跟蹤各個 Region 裡面垃圾堆積的“價值”大小，價值即回收所獲得的空間大小以及所需時間的經驗值，然後在後台維護一個優先隊列，根據用戶設定的允許的收集停頓時間（-XX:MaxGCPauseMillis 默認200毫秒），優先處理價值大的 Region 。</p>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503120211050.png" alt="image-20220503120211050"></p>
+<p>運作大致劃分為四個步驟：1）初始標記；2）並發標記；3）最終標記；4）篩選回收：採用標記-複製算法整體處理 Region 到一個空的 Region。除了並發標記外都需要 STW 。</p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503120725530.png" alt="image-20220503120725530" style="zoom:80%;" />
+<p>G1 從整體來看基於標記-整理算法，局部（兩個 Region 之間）上基於標記-複製算法，意味著 G1 不會產生內存碎片。G1 比 CMS 處理器需要更多的內存佔用和程序運行時的額外執行負載。</p>
+<h4 id="todo低延遲垃圾收集器">//TODO低延遲垃圾收集器</h4>
+<h4 id="垃圾收集器調優參數">垃圾收集器調優參數</h4>
+<p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503121445535.png" alt="image-20220503121445535"></p>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503121517001.png" alt="image-20220503121517001" style="zoom:80%;" />
 
 
 
