@@ -41,6 +41,11 @@
     
     
 
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     
@@ -214,12 +219,62 @@
 <h4 id="垃圾收集器調優參數">垃圾收集器調優參數</h4>
 <p><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503121445535.png" alt="image-20220503121445535"></p>
 <img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220503121517001.png" alt="image-20220503121517001" style="zoom:80%;" />
+<h3 id="虛擬機性能監控故障處理工具">虛擬機性能監控、故障處理工具</h3>
+<h4 id="基礎故障處理工具">基礎故障處理工具</h4>
+<h5 id="jps虛擬機進程狀況工具">jps：虛擬機進程狀況工具</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>jps [ options ] [ hostid ]
+</span></span></code></pre></div><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220505100156586.png" alt="image-20220505100156586" style="zoom:67%;" />
+<h5 id="jstat虛擬機統計信息監視工具">jstat：虛擬機統計信息監視工具</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>jstat [ option vmid [ interval [ s|ms ] [ count ] ] ]
+</span></span></code></pre></div><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220505100534181.png" alt="image-20220505100534181" style="zoom:67%;" />
+<h5 id="jinfojava-配置信息工具">jinfo：Java 配置信息工具</h5>
+<p>實時查看和調整虛擬機的各項參數。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>jinfo [ option ] pid
+</span></span></code></pre></div><h5 id="jmapjava-內存映像工具">jmap：Java 內存映像工具</h5>
+<pre tabindex="0"><code>jinfo [ option ] vmid
+</code></pre><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220505101331591.png" alt="image-20220505101331591" style="zoom:67%;" />
+<h5 id="jhat虛擬機堆轉儲快照分析工具">jhat：虛擬機堆轉儲快照分析工具</h5>
+<p>與 jmap 搭配使用，別用。</p>
+<h5 id="jstackjava-堆棧跟蹤工具">jstack：Java 堆棧跟蹤工具</h5>
+<p>用於生成虛擬機當前時刻的線程快照。</p>
+<pre tabindex="0"><code>jstack [ option ] vmid
+</code></pre><img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220505101755056.png" alt="image-20220505101755056" style="zoom:67%;" />
+<h6 id="小結">小結</h6>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220505102002699.png" alt="image-20220505102002699" style="zoom:67%;" />
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220505102036644.png" alt="image-20220505102036644" style="zoom:80%;" />
+<h4 id="可視化故障處理工具">可視化故障處理工具</h4>
+<h5 id="jhsdb基於服務性代理的調試工具">JHSDB：基於服務性代理的調試工具</h5>
+<h5 id="jconsolejava-監視與管理控制台">JConsole：Java 監視與管理控制台</h5>
+<h5 id="visualvm多合-故障處理工具">VisualVM：多合-故障處理工具</h5>
+<h5 id="java-mission-control可持續在線的監控工具">Java Mission Control：可持續在線的監控工具</h5>
+<h2 id="虛擬機執行子系統">虛擬機執行子系統</h2>
+<h3 id="類文件結構">類文件結構</h3>
+<h4 id="class-類文件的結構">Class 類文件的結構</h4>
+<p>Class 文件格式採用一種類似於 C 語言結構體的偽結構來存儲數據，這種偽結構只有兩種數據類型：“無符號數”和“表”。</p>
+<ul>
+<li>無符號數屬於基本的數據類型，以 u1、u2、u4、u8 來分別表示1、2、4、8個字節的無符號數，可以用來描述數字、索引引用、數量值或者按照 UTF-8 編碼構成的字符串值；</li>
+<li>表是由多個無符號數或者其他表作為數據項構成的復合數據類型，整個 Class 文件就可以被視作是一張表。</li>
+</ul>
+<img src="https://zxk-pic.oss-cn-beijing.aliyuncs.com/md/image-20220509101722780.png" alt="image-20220509101722780" style="zoom:67%;" />
 
 
 
   <footer>
   
   
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
   
   <hr>
