@@ -6,20 +6,11 @@
     <description>Recent content in Tags on zhouer&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Java</title>
-      <link>/tags/java/</link>
-      <pubDate>Mon, 09 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/java/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Wed, 11 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>坂元裕二</title>
       <link>/tags/%E5%9D%82%E5%85%83%E8%A3%95%E4%BA%8C/</link>
-      <pubDate>Wed, 27 Apr 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 11 May 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E5%9D%82%E5%85%83%E8%A3%95%E4%BA%8C/</guid>
       <description></description>
@@ -28,7 +19,7 @@
     <item>
       <title>日劇</title>
       <link>/tags/%E6%97%A5%E5%8A%87/</link>
-      <pubDate>Wed, 27 Apr 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 11 May 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E6%97%A5%E5%8A%87/</guid>
       <description></description>
@@ -37,9 +28,18 @@
     <item>
       <title>日語</title>
       <link>/tags/%E6%97%A5%E8%AA%9E/</link>
-      <pubDate>Wed, 27 Apr 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 11 May 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E6%97%A5%E8%AA%9E/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>/tags/java/</link>
+      <pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/java/</guid>
       <description></description>
     </item>
     
