@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>code on zhouer&#39;s blog</title>
+    <link>/categories/code/</link>
+    <description>Recent content in code on zhouer&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 29 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《深入理解 Java 虛擬機》學習筆記</title>
+      <link>/cn/2022/04/29/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9B%E6%93%AC%E6%A9%9F%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/</link>
+      <pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/2022/04/29/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9B%E6%93%AC%E6%A9%9F%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/</guid>
+      <description>走近 Java 自動內存管理 Java 內存區域與內存溢出異常 運行時數據區域 程序計數區 Program Counter Register，可以看做是當前線程所執行的字節碼的行號指示器。字節碼解釋器工作時就是通過改變這個計數器的值來選取下一條需要執行的字節碼指令，它是程序控製流的指示器，分支、循環、跳轉、異常處理、線程恢復等基礎功能都需要依賴這個計數器來完成。
+由於Java虛擬機的多線程是通過線程輪流切換、分配處理器執行時間的方式來實現的，在任何一個確定的時刻，一個處理器（對於多核處理器來說是一個內核）都只會執行一條線程中的指令。因此，為了線程切換後能恢復到正確的執行位置，每條線程都需要有一個獨立的程序計數器，各條線程之間計數器互不影響，獨立存儲，我們稱這類內存區域為「線程私有」的內存。
+當實現 Native 方法時，這個計數器值為Undefined.
+Java 虛擬機棧 Java Virtual Machine Stack，線程私有的，生命週期與線程相同。每個方法被執行時，虛擬機就同步創建一個棧幀用於存儲局部變量表、操作數棧、動態連接、方法出口等信息。每一個方法被調用直至執行完畢的過程，就對應著一個棧幀在虛擬機棧中從入棧到出棧的過程。
+局部變量表存放了編譯器可知的各種 Java 虛擬機基本數據類型、對象引用和 returnAddress 類型（指向了一條字節碼指令的地址）。局部變量表以 Slot 的基本單元儲存數據，局部變量表所需的內存空間在編譯期間完成分配在方法運行期間不會改變局部變量表的大小（指 Slot 的數量）。
+本地方法棧 Native Method Stack，為調用本地方法服務。
+Java 堆 Java Heap，”幾乎“所有的對象實例都在這裡分配內存。所有線程共享的 Java 堆中可以劃分出多個線程私有的分配緩衝區（Thread Local Allocation Buffer, TLAB)，以提升對象分配時的效率。
+方法區 Method Area，用於存儲已被虛擬機加載的類型信息、常量、靜態變量、及時編譯器編譯後的代碼緩存等數據。作為一個概念，在 HotSpot 中以永久代/元空間實現。
+運行時常量池 Runtime Constant Pool，屬於方法區的一部分。Class 文件中用於存放編譯期生成的各種字面量與符號引用的常量池表在類加載後放到方法區的運行時常量池中。
+直接內存 Direct Memory，在 NIO 的引入後虛擬機可以使用 Native 函數庫直接分配堆外內存，然後通過通過一個 DirectByteBuffer 對象作為這塊內存的引用進行操作。
+對象 對象的創建  虛擬機遇到 new 指令； 檢查這一指令的藏書是否能在常量池中定位的到一個類的符號引用，並檢查這個類是否被加載、解析和初始化。沒有的話就進行類加載。 為新對象在堆中分配內存；（多線程情況下，採用 CAS 或 TLAB） 將分配到的內存空間（不包括對象頭）都初始化為零值； 對對象進行必要的設置，信息存儲在對象頭裡。  此時Class 文件中的 &amp;lt;init&amp;gt; 方法尚未執行，所有字段都為零值。</description>
+    </item>
+    
+    <item>
+      <title>《圖解設計模式》學習筆記</title>
+      <link>/cn/2022/04/26/%E5%9C%96%E8%A7%A3%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/</link>
+      <pubDate>Tue, 26 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/2022/04/26/%E5%9C%96%E8%A7%A3%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/</guid>
+      <description>相關代碼。
+Iterator 模式 用於在數據集合中按照順序遍歷集合。
+ next() 返回當前元素，並指向下一個元素； hasNext() 確認接下來是否可以調用 next 方法。  Adapter 模式  target 負責定義所需要的方法； client 負責使用 target 所定義的方法，即具體的業務實現； adaptee 被適配的一方，即提供方法具體實現的一方； adapter 使用 adaptee 已有的功能滿足 target 的需求，適配器本體。  類適配器模式：使用繼承類和繼承要求實現方法的接口，重寫接口方法時調用父類方法實現包裝。
+對象適配器模式：利用被包裝類的具體實現的方法調用實現包裝，即在適配器中創建一個被包裝類的實例。
+Template Method 模式 在父類中定義處理流程的框架，在子類中實現具體處理
+ AbstractClass 負責聲明在模板方法中所使用到的抽象方法和實現模板方法； ConcreteClass 負責實現 AbstractClass 定義的抽象方法。  Factory Method 模式  Product 屬於框架的一部分，是一個抽象類，定義了工廠生產出的實例所持有的接口，具體的實現由子類決定； Creator 屬於框架的一部分，是負責生產產品的抽象類，不使用 new 關鍵字來生產實例，而是調用生產實例的專門方法（即在 create 方法中對 createProduct 抽象方法的調用），這樣可以防止父類與其他具體類的實現。 ConcreteProduct Product 的具體實現； ConcreteCreator Creator 的具體實現。  Singleton 模式 單例。
+Prototype 模式 根據實例來生成新實例。</description>
+    </item>
+    
+  </channel>
+</rss>
